@@ -4,7 +4,7 @@
 # In[ ]:
 
 
-# ============================> 1
+# ============================> 1. Import openai api
 import os
 import openai
 import sys
@@ -18,7 +18,7 @@ _ = load_dotenv(find_dotenv()) # read local .env file
 
 openai.api_key  = os.environ['OPENAI_API_KEY']
 
-# ============================> 2
+# ============================> 2. Import model
 import datetime
 current_date = datetime.datetime.now().date()
 if current_date < datetime.date(2023, 9, 2):
@@ -27,7 +27,7 @@ else:
     llm_name = "gpt-3.5-turbo"
 
 
-# ============================> 1
+# ============================> 3. Import Langchain and embedding tool
 
 import pandas as pd
 from langchain.embeddings.openai import OpenAIEmbeddings
@@ -37,6 +37,7 @@ from langchain.chains import RetrievalQA, ConversationalRetrievalChain
 from langchain.chat_models import ChatOpenAI
 
 
+# ============================> 4. Build data loader pipeline
 class Document:
     def __init__(self, page_content, metadata):
         self.page_content = page_content
@@ -69,6 +70,8 @@ def load_db(file, chain_type, k):
         return_generated_question=True,
     )
     return qa
+
+# ============================> 5. Build RAG pipeline
 
 import panel as pn
 import param
@@ -148,7 +151,7 @@ class cbfs(param.Parameterized):
     
 
 
-# ============================> 2
+# ============================> 5. Interface dashboard
 cb = cbfs()
 
 file_input = pn.widgets.FileInput(accept='.pdf')
