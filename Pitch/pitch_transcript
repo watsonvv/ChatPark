@@ -1,0 +1,162 @@
+==> 1
+- Hey folks, my name is Watson. Welcome to my pitch about Explainable AI for Urban Spatial Analysis. 
+
+- I will mainly focused on how explainable AI provide a lens for city planners to see how green spaces in Philadelphia are perceived by the community.
+
+
+==> 2
+- The project will culminate in the creation of a chatbot named ChatPark to detailly talk about my journey in Urban AI world.
+
+
+==> 3
+- Firstly, I guess everyone has been very familiar with ChatGPT, and I as well.
+
+- So, before starting any hard hack, I plan to get a general understanding of the situation through ChatGPT by typing the question: Which park in Philly has the highest rating from visitors and why?
+
+- After a second, it gives Fairmount Park. It’s great, but the description is a bit vague.
+
+
+==> 4
+- So, to get more concrete case of reviews, I ask a second question: Can you share a visitor’s review that highlights this feature?
+
+- Quickly, it gives a very detailed comment from a visitor.
+
+- At first, I am so surprised but quickly suspect: Would anyone really write such a long review?
+
+
+==> 5
+- With this doubt, I ask a third question: can you attribute this review to its author?
+
+- Under my relentless asking, ChatGPT finally admitted: its answer is just a fictional composition.
+
+
+==> 6
+- This case is not alone.
+
+- If you search GPT + Hallucination online, you will see countless similar reports talking about ChaGPT would make things up and even lie.
+
+- Europe even launch a series of laws to restrict the use of AI
+
+
+==> 7
+- So, how does it happen? After some research, I found that the most important reason is partial information. Since GPT4 is trained on general information online. It knows nearly everything but it also can not deeply know everything
+
+- Moreover, since ChatGPT is based on a pre-trained large language model, it do not know what’s happening after its training date.
+
+- Both this two reasons make ChatGPT more like a conservative polymath. However, actually, to help city planner do better decision, we do need a progressive specialist. 
+
+- So, again, how?
+
+
+==> 8
+- The first solution is very easy, Just upload related dataset to ChatGPT via this upload icon and I guess most of you have used this feature very often.
+
+- Me too, I just uploaded a dataset containing park reviews crawled from Google Map. Its good enough to do some basic research.
+
+- However, this way has four drawbacks:
+    - First, You need to pay for GPT 4, since GPT 3.5 do not have file uploader feature
+    - Second, It can not support large file
+    - Thirdly, it’s not autonomous, you have to upload all the time with new data
+    - Last but the most important, its context window is limited
+
+
+==> 9
+- According to a research on context window of top models, although GPT-4 ranked the second place, with 128k tokens, which is equal to 96k words, it still can not read and remember a very big file at one time.
+
+
+==> 10
+- At the same time, I write a python script to count numbers of word in my dataset, which is in csv format
+
+- It shows 1.6M words, which means although I successfully uploaded it to GPT-4, it can only remember a very tiny part of the dataset, which will again cause to inaccuracy.
+
+
+==> 11
+- In order to thoroughly resolve this issue, I find another way: build an external vector database
+
+- For analogy. If AI is a student learning a new language. Upload a file is more like giving a cheat sheet, which can help answer some specific questions but so much.
+
+- But a new vector database is more like a dictionary, which contains much more information.
+
+
+==> 12
+- The core technology in this solution is RAG, or Retrieval-Augmented Generation
+
+
+==> 13
+- So what’s it? According the blog from Nvidia, RAG is a technique for enhancing the accuracy and reliability of Generative AI models with facts fetched from external sources.
+
+- In case here, park review from Google Map is the external sources
+
+
+==> 14
+- From this workflow diagram, we can clearly see that compared to traditional Data-centric workflow, RAG have three special steps:
+    - Split and embed draw ata from text into number
+    - Store these numerical data into vector database
+    - Use query engine to retrieve information from vector database
+
+- Since all data will be embedded as vector data, both store and retrieved speed is very fast, enabling the chatbot response in a very high speed.
+
+
+==> 15
+- Based on workflow, I use the following tech stack to build the new chatbot.
+
+1. Firstly for Data layer, I used Python and Google Cloud to extract and store raw data. For vector database, I choose Chroma and OpenAI Embedding as my embed tool
+2. Second for model layer, I use GPT 3.5 since GPT 4 is not accessible for free
+3. For the layer of Infrastructure, I choose Langchain, which is very popular now as my orchestration and Panel as front-end UI
+4. Finally, Google Cloud again will be the home for my product to be deployed
+
+
+==> 16
+So this is the UI of ChatPark, let’s quickly go through it
+
+The interface has 4 tabs.
+
+1. Firstly, is the conversation tab with an search bar for asking question.
+
+I actually ask the same question: Which park in Philly has the highest ratings, and why?  
+
+Additionally, I ask more: please give me back the original reviews of that park 
+
+
+==> 17
+From second tab, Database
+
+We can clearly see my prompt and the process of its querying. 
+
+Which is explainable, since we can even see which record the ChatPark is reading and analyzing
+
+
+==> 18
+Third, in chat history, we can see all querying detailed history. 
+
+For example, I copy and paste the final  answer on the right side, which contains both its answer and some proof, which is the concrete review from visitors
+
+
+==> 19
+Finally in the tab Configure, we can add temporary important file as well.
+
+
+==> 20
+In conclusion, ChatPark has the following four core features:
+- Accurate response
+- Faster processing, due to vector database
+- Real-time update since the raw dataset is on google cloud, which can automatically crawl data from time to time
+- And lastly, reliable answer since you can check its query process at any time
+
+
+==> 21
+- However, this is far from the end. The foundational model is still evolving.
+
+- Several days ago, OpenAI CEO Sam Altman just said GPT-4 is the dumbest model in OpenAI’s AI evolution. At the same time, Meta just introduced Llama3, the start-of-art open source model recently.
+
+
+==> 22
+- The finalized version of AI in urban planing is still unclear today, but I believe we need to know more about fundamental knowledge of this tech wave and do more fine-tune work on model layer. 
+
+
+==> 23
+In the end, I want to thank Mjumbe Pro for Deployment Assistance, Gao xiayuanshan for dataset provision, Professor Eric for the overall capstone guidance, and also, ChatGPT for logo generation
+
+
+==> 24
+Moreover, many thanks to everyone here for the listening!

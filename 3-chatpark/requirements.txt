@@ -1,0 +1,9 @@
+docarray==0.40.0
+langchain==0.1.17
+langchain_openai==0.1.6
+openai==1.25.1
+pandas==2.2.2
+panel==1.4.2
+param==2.1.0
+protobuf==5.26.1
+python-dotenv==1.0.1
